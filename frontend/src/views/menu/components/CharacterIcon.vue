@@ -1,7 +1,7 @@
 <template>
   <div id="characters" class="w-full overflow-auto">
     <div
-      class="w-14 h-14 mx-auto flex flex-col justify-center bg-slate-400 rounded-lg my-2 font-mono text-3xl text-center"
+      class="w-14 h-14 mx-auto flex flex-col justify-center bg-slate-400 rounded-lg my-2 font-mono text-3xl text-center cursor-pointer"
       v-for="character in characters"
       :key="character.id"
     >
@@ -18,4 +18,9 @@ const characterStore = useCharacterStore();
 const { characters } = storeToRefs(characterStore);
 </script>
 
-<style scoped></style>
+<style scoped>
+#characters::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+</style>

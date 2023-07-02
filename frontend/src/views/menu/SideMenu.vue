@@ -29,7 +29,7 @@
           class="mx-auto w-12 flex-1 border-2 border-transparent border-b-gray-400"
         ></div>
       </div>
-      <Character class="flex-1"></Character>
+      <Character class="flex-1 mt-2"></Character>
     </div>
     <div
       id="setting"

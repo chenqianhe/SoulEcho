@@ -1,7 +1,7 @@
 <template>
   <div id="chat-list" class="w-full h-full px-2 overflow-auto">
     <div
-      class="h-10 w-full px-1 flex flex-row items-center mb-2 rounded-lg bg-slate-50"
+      class="h-10 w-full px-1 flex flex-row items-center mb-2 rounded-lg bg-slate-50 cursor-pointer"
       v-for="chat in chats.historyChats.slice(0, 1)"
       :key="chat.dialogueId"
     >
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div
-      class="h-10 w-full px-1 flex flex-row items-center mb-2 rounded-lg"
+      class="h-10 w-full px-1 flex flex-row items-center mb-2 rounded-lg cursor-pointer"
       v-for="chat in chats.historyChats"
       :key="chat.dialogueId"
     >
@@ -40,6 +40,7 @@
         />
       </div>
     </div>
+    <div class="h-18 w-full px-1"></div>
   </div>
 </template>
 
