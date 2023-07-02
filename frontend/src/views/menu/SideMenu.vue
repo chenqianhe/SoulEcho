@@ -8,7 +8,6 @@
       <div
         id="user-icon"
         class="w-16 h-16 mx-auto bg-no-repeat bg-center bg-cover"
-        :style="{ backgroundImage: 'url(src/assets/user_icon.svg)' }"
       ></div>
     </div>
     <div id="character" class="w-full flex-1 min-h-0 flex flex-col">
@@ -23,7 +22,6 @@
           <div
             id="character_add-btn-img"
             class="w-14 h-14 rounded-lg bg-no-repeat bg-center bg-cover shadow-inner hover:shadow-md"
-            :style="{ backgroundImage: 'url(src/assets/add_light.svg)' }"
           ></div>
         </div>
         <div
@@ -41,7 +39,6 @@
         <div
           id="setting-btn-img"
           class="w-12 h-12 bg-no-repeat bg-center bg-cover"
-          :style="{ backgroundImage: 'url(src/assets/setting_light.svg)' }"
         ></div>
       </div>
     </div>
@@ -53,6 +50,18 @@ import Character from "@/views/menu/components/CharacterIcon.vue";
 </script>
 
 <style scoped>
+#user-icon {
+  background-image: url("../../assets/user_icon.svg");
+}
+
+#character_add-btn-img {
+  background-image: url("../../assets/add_light.svg");
+}
+
+#setting-btn-img {
+  background-image: url("../../assets/setting_light.svg");
+}
+
 #character_add-btn {
   transition: transform 0.3s;
 }
