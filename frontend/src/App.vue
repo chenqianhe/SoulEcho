@@ -1,53 +1,31 @@
-<script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div id="main-container" class="w-full h-full flex flex-row">
+    <div
+      id="menus"
+      class="flex-none flex flex-row sm:w-100 sm:flex-none"
+      v-if="showMenuBox"
+    >
+      <Menu class="flex-none"></Menu>
+      <ChatSelection class="flex-1 sm:flex-none"></ChatSelection>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div
+      id="chat-area"
+      class="hidden sm:flex-1 sm:block sm:w-full sm:h-full"
+      v-if="showDialogBox"
+    >
+      <Chat></Chat>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup lang="ts">
+import Menu from "@/views/menu/SideMenu.vue";
+import Chat from "@/views/Chat/ChatArea.vue";
+import ChatSelection from "@/views/ChatSlection/ChatSelection.vue";
+import { ref } from "vue";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const showMenuBox = ref(true);
+const showDialogBox = ref(true);
+</script>
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style scoped></style>
