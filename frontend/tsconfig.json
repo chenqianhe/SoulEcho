@@ -6,7 +6,7 @@
     "src/**/*.vue"
   ],
   "compilerOptions": {
-    "baseUrl": "./persuasion-strategy-vis",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
     }
