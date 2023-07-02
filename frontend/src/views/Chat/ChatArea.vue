@@ -21,7 +21,6 @@
       <div
         id="chat_input_upload-btn"
         class="h-8 w-8 flex-none bg-no-repeat bg-center bg-cover"
-        :style="{ backgroundImage: 'url(src/assets/send.svg)' }"
       ></div>
     </div>
   </div>
@@ -34,4 +33,8 @@ import { ref } from "vue";
 const input = ref("");
 </script>
 
-<style scoped></style>
+<style scoped>
+#chat_input_upload-btn {
+  background-image: url("../../assets/send.svg");
+}
+</style>
