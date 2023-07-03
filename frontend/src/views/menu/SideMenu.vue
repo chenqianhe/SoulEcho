@@ -70,7 +70,7 @@
 <script setup lang="ts">
 import Character from "@/views/menu/components/CharacterIcon.vue";
 import { ref } from "vue";
-import { DatasetDB } from "@/apis/Dataset";
+import { DatasetDB } from "@/apis/dataset";
 import { CharacterDB } from "@/apis/character";
 
 const inputContent = ref("");
