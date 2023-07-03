@@ -9,6 +9,6 @@ const app = createApp(App);
 
 app.use(createPinia());
 
-await useCharacterStore().initCharacters();
-
-app.mount("#app");
+useCharacterStore().initCharacters().then(() => {
+    app.mount("#app");
+});
