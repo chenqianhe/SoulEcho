@@ -6,15 +6,15 @@ import { useCharacterStore } from "@/stores/characters";
 export namespace CharacterDB {
   export const getAllCharacter = async () => {
     const characters: Character[] = [];
-    await characterDB.iterate((value, key) => {
+    await characterDB.iterate((value) => {
       characters.push(value as Character);
     });
     return characters;
   };
 
-  export const addCharacter = (rawName: string, datasetId: string) => {
+  export const addCharacter = async (rawName: string, datasetId: string) => {
     let characters: Character[] = [];
-    getAllCharacter().then((res) => {
+    await getAllCharacter().then((res) => {
       characters = res;
     });
     let exist = false;

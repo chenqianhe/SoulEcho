@@ -118,6 +118,7 @@ const uploadDataSet = async () => {
     rawNames.forEach((name) => {
       CharacterDB.addCharacter(name, id);
     });
+    inputContent.value = "";
   }
 };
 </script>

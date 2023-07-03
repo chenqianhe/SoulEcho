@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Character } from "@/types/character";
+import { CharacterDB } from "@/apis/character";
 
 export const useCharacterStore = defineStore("counter", {
   state: () => ({
@@ -15,6 +16,9 @@ export const useCharacterStore = defineStore("counter", {
     },
   },
   actions: {
+    async initCharacters() {
+      this.characters = await CharacterDB.getAllCharacter();
+    },
     setSelectedCharacter(characterData: Character) {
       if (this.characters.includes(characterData)) {
         this.selectedCharacter = characterData;

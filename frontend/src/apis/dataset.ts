@@ -31,7 +31,7 @@ export namespace DatasetDB {
 
   export const getAllDataset = async () => {
     const datasets: Dataset[] = [];
-    await datasetDB.iterate((value, key) => {
+    await datasetDB.iterate((value) => {
       datasets.push(value as Dataset);
     });
     return datasets;
