@@ -9,19 +9,21 @@
     >
       <div
         id="chat-selection_op-delete-character"
-        class="h-12 basis-3/12 bg-white rounded-lg"
+        class="h-12 basis-3/12 bg-white rounded-lg se-clickable-btn"
       >
-        <img
-          src="../../assets/delete_profile_light.svg"
-          alt="Delete"
-          class="h-8 mx-auto my-2"
-        />
+        <div
+          id="chat-selection_op-delete-character-img"
+          class="h-8 mx-auto my-2 se-div-bg-img-format bg-auto"
+        ></div>
       </div>
       <div
         id="chat-selection_op-add-chat"
-        class="h-12 basis-8/12 bg-slate-50 rounded-lg flex flex-row items-center"
+        class="h-12 basis-8/12 bg-slate-50 rounded-lg flex flex-row items-center se-clickable-btn"
       >
-        <img src="../../assets/add_light.svg" alt="Add" class="w-10 h-10" />
+        <div
+          id="chat-selection_op-add-chat-img"
+          class="w-10 h-10 se-div-bg-img-format"
+        ></div>
         <span class="font-mono text-x text-start">New Chat</span>
       </div>
     </div>
@@ -33,4 +35,12 @@
 import ChatList from "@/views/ChatSlection/components/ChatList.vue";
 </script>
 
-<style scoped></style>
+<style scoped>
+#chat-selection_op-delete-character-img {
+  background-image: url("../../assets/delete_profile_light.svg");
+}
+
+#chat-selection_op-add-chat-img {
+  background-image: url("../../assets/add_light.svg");
+}
+</style>

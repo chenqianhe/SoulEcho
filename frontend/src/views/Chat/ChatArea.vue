@@ -20,7 +20,7 @@
       ></textarea>
       <div
         id="chat_input_upload-btn"
-        class="h-8 w-8 flex-none bg-no-repeat bg-center bg-cover"
+        class="h-8 w-8 flex-none se-div-bg-img-format"
       ></div>
     </div>
   </div>

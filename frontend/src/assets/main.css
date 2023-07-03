@@ -31,3 +31,19 @@
 ::-webkit-scrollbar-thumb:active {
   background-color: rgba(0, 0, 0, 0.55);
 }
+
+
+@layer components {
+  .se-div-bg-img-format {
+    @apply bg-cover bg-center bg-no-repeat
+  }
+
+  .se-mark-text {
+    @apply select-none
+  }
+
+  .se-clickable-btn {
+    @apply cursor-pointer hover:shadow-md transition duration-300 ease-in-out active:scale-95
+  }
+}
+

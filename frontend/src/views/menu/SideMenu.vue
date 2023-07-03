@@ -5,10 +5,7 @@
       <img src="../../assets/sim.png" class="w-12 mx-auto" alt="PersonaSim" />
     </div>
     <div id="user" class="w-full flex-none h-18">
-      <div
-        id="user-icon"
-        class="w-16 h-16 mx-auto bg-no-repeat bg-center bg-cover"
-      ></div>
+      <div id="user-icon" class="w-16 h-16 mx-auto se-div-bg-img-format"></div>
     </div>
     <div id="character" class="w-full flex-1 min-h-0 flex flex-col">
       <div
@@ -17,11 +14,11 @@
       >
         <div
           id="character_add-btn"
-          class="w-14 h-14 mx-auto flex-none bg-white rounded-lg"
+          class="w-14 h-14 mx-auto se-clickable-btn flex-none bg-white rounded-2xl"
         >
           <div
             id="character_add-btn-img"
-            class="w-14 h-14 rounded-lg bg-no-repeat bg-center bg-cover shadow-inner hover:shadow-md"
+            class="w-14 h-14 rounded-2xl se-clickable-btn se-div-bg-img-format shadow-inner"
           ></div>
         </div>
         <div
@@ -36,10 +33,7 @@
       class="w-full flex-none h-18 bg-gradient-to-b from-slate-200 to-slate-300"
     >
       <div id="setting-btn" class="w-12 h-12 py-2 mx-auto rounded-lg">
-        <div
-          id="setting-btn-img"
-          class="w-12 h-12 bg-no-repeat bg-center bg-cover"
-        ></div>
+        <div id="setting-btn-img" class="w-12 h-12 se-div-bg-img-format"></div>
       </div>
     </div>
   </div>
@@ -60,13 +54,5 @@ import Character from "@/views/menu/components/CharacterIcon.vue";
 
 #setting-btn-img {
   background-image: url("../../assets/setting_light.svg");
-}
-
-#character_add-btn {
-  transition: transform 0.3s;
-}
-
-#character_add-btn:active {
-  transform: scale(0.9);
 }
 </style>

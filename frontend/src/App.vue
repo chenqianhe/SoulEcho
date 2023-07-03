@@ -2,7 +2,7 @@
   <div id="main-container" class="w-full h-full flex flex-row">
     <div
       id="menus"
-      class="flex-none flex flex-row sm:w-100 sm:flex-none"
+      class="se-mark-text flex-auto flex flex-row sm:w-100 sm:flex-none"
       v-if="showMenuBox"
     >
       <Menu class="flex-none"></Menu>
