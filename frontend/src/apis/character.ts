@@ -3,7 +3,7 @@ import { genId } from "@/apis/utils/genId";
 import type { Character } from "@/types/character";
 import { useCharacterStore } from "@/stores/characters";
 
-export namespace CharacterDB {
+export namespace CharacterOP {
   export const getAllCharacter = async () => {
     const characters: Character[] = [];
     await characterDB.iterate((value) => {
@@ -52,6 +52,21 @@ export namespace CharacterDB {
         (character as Character).createdTime = "0";
         characterDB.setItem(id, character);
         useCharacterStore().updateCharacterCreatedTime(id, "0");
+      }
+    });
+  };
+
+  export const createCharacter = (id: string, name: string) => {
+    characterDB.getItem(id).then((character) => {
+      if (character) {
+        (character as Character).name = name;
+        (character as Character).createdTime = `${new Date().getTime()}`;
+        characterDB.setItem(id, character);
+        useCharacterStore().updateCharacterCreatedTime(
+          id,
+          `${new Date().getTime()}`
+        );
+        useCharacterStore().updateCharacterName(id, name);
       }
     });
   };

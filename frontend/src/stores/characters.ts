@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { Character } from "@/types/character";
-import { CharacterDB } from "@/apis/character";
+import { CharacterOP } from "@/apis/character";
 
 export const useCharacterStore = defineStore("counter", {
   state: () => ({
@@ -17,7 +17,12 @@ export const useCharacterStore = defineStore("counter", {
   },
   actions: {
     async initCharacters() {
-      this.characters = await CharacterDB.getAllCharacter();
+      this.characters = await CharacterOP.getAllCharacter();
+    },
+    resortCharacters() {
+      this.characters = this.characters.sort((a, b) => {
+        return parseInt(b.createdTime) - parseInt(a.createdTime);
+      });
     },
     setSelectedCharacter(characterData: Character) {
       if (this.characters.includes(characterData)) {
@@ -30,10 +35,12 @@ export const useCharacterStore = defineStore("counter", {
       );
       if (character) {
         character.sourceDatasetId.push(datasetId);
+        this.resortCharacters();
       }
     },
     addCharacter(characterData: Character) {
       this.characters.push(characterData);
+      this.resortCharacters();
     },
     updateCharacterCreatedTime(characterId: string, createdTime: string) {
       const character = this.characters.find(
@@ -41,6 +48,16 @@ export const useCharacterStore = defineStore("counter", {
       );
       if (character) {
         character.createdTime = createdTime;
+        this.resortCharacters();
+      }
+    },
+    updateCharacterName(characterId: string, name: string) {
+      const character = this.characters.find(
+        (character) => character.id === characterId
+      );
+      if (character) {
+        character.name = name;
+        this.resortCharacters();
       }
     },
   },

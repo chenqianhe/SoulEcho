@@ -15,6 +15,7 @@
         <div
           id="character_add-btn"
           class="w-14 h-14 mx-auto se-clickable-btn flex-none bg-white rounded-2xl"
+          onclick="add_character_modal.showModal()"
         >
           <div
             id="character_add-btn-img"
@@ -35,12 +36,12 @@
       <div
         id="setting-btn"
         class="w-12 h-12 py-2 mx-auto rounded-lg"
-        onclick="my_modal_1.showModal()"
+        onclick="setting_modal.showModal()"
       >
         <div id="setting-btn-img" class="w-12 h-12 se-div-bg-img-format"></div>
       </div>
     </div>
-    <dialog id="my_modal_1" class="modal modal-bottom sm:modal-middle">
+    <dialog id="setting_modal" class="modal modal-bottom sm:modal-middle">
       <form method="dialog" class="modal-box">
         <h1 class="font-bold text-2xl">Upload Dataset</h1>
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -64,17 +65,56 @@
         </button>
       </form>
     </dialog>
+    <dialog id="add_character_modal" class="modal modal-bottom sm:modal-middle">
+      <form method="dialog" class="modal-box">
+        <h1 class="font-bold text-2xl">Add Character</h1>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          ✕
+        </button>
+        <h2 class="text-xl mt-4">Select Character</h2>
+        <select
+          class="select w-full bg-slate-100 text-xl"
+          v-model="createCharacter"
+        >
+          <option
+            v-for="character in characters"
+            :key="character.id"
+            v-show="character.createdTime === '0'"
+          >
+            {{ character.rawName }}
+          </option>
+        </select>
+        <h2 class="text-xl mt-4">Set Nickname</h2>
+        <input
+          type="text"
+          v-model="inputCharacterNickname"
+          placeholder=""
+          class="input w-full mb-4 bg-slate-100 text-xl border-2 border-solid border-slate-300 focus:outline-0"
+        />
+        <button class="btn mt-2 float-right" @click="createNewCharacter">
+          Create
+        </button>
+      </form>
+    </dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import Character from "@/views/menu/components/CharacterIcon.vue";
 import { ref } from "vue";
-import { DatasetDB } from "@/apis/dataset";
-import { CharacterDB } from "@/apis/character";
+import { DatasetOP } from "@/apis/dataset";
+import { CharacterOP } from "@/apis/character";
+import { useCharacterStore } from "@/stores/characters";
+import { storeToRefs } from "pinia";
 
 const inputContent = ref("");
 const inputNickname = ref("");
+
+const createCharacter = ref("");
+const inputCharacterNickname = ref("");
+
+const characterStore = useCharacterStore();
+const { characters } = storeToRefs(characterStore);
 
 const uploadDataSet = async () => {
   const rawNames: string[] = [];
@@ -110,15 +150,32 @@ const uploadDataSet = async () => {
       return;
     }
   }
-  const id = await DatasetDB.uploadDataset(
+  const id = await DatasetOP.uploadDataset(
     inputContent.value,
     inputNickname.value
   );
   if (id !== "") {
     rawNames.forEach((name) => {
-      CharacterDB.addCharacter(name, id);
+      CharacterOP.addCharacter(name, id);
     });
     inputContent.value = "";
+    inputNickname.value = "";
+  }
+};
+
+const createNewCharacter = () => {
+  if (inputCharacterNickname.value === "") {
+    return;
+  }
+
+  const character = characters.value.find(
+    (character) => character.rawName === createCharacter.value
+  );
+
+  if (character) {
+    CharacterOP.createCharacter(character.id, inputCharacterNickname.value);
+    createCharacter.value = "";
+    inputCharacterNickname.value = "";
   }
 };
 </script>
