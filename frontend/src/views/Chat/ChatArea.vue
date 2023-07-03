@@ -28,9 +28,24 @@
 
 <script setup lang="ts">
 import Dialogue from "@/views/Chat/components/DialogueArea.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useChatStore } from "@/stores/chats";
+import { storeToRefs } from "pinia";
+import { DialogueOP } from "@/apis/dialogue";
 
 const input = ref("");
+const chatStore = useChatStore();
+const { selectedChat } = storeToRefs(chatStore);
+
+watch(
+  selectedChat,
+  (newVal) => {
+    if (newVal) {
+      DialogueOP.loadDialogue(newVal.dialogueId);
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped>

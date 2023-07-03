@@ -28,14 +28,16 @@ import { useCharacterStore } from "@/stores/characters";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import type { Character } from "@/types/character";
+import { ChatOP } from "@/apis/chat";
 
 const characterStore = useCharacterStore();
-const { characters } = storeToRefs(characterStore);
+const { characters, selectedCharacter } = storeToRefs(characterStore);
 
-const selectedCharacterId = ref("");
+const selectedCharacterId = ref(selectedCharacter.value?.id || "");
 const selectCharacter = (character: Character) => {
   selectedCharacterId.value = character.id;
   characterStore.setSelectedCharacter(character);
+  ChatOP.loadChats(character.id);
 };
 </script>
 

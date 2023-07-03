@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import type { Character } from "@/types/character";
 import { CharacterOP } from "@/apis/character";
+import { ChatOP } from "@/apis/chat";
 
 export const useCharacterStore = defineStore("counter", {
   state: () => ({
@@ -18,6 +19,11 @@ export const useCharacterStore = defineStore("counter", {
   actions: {
     async initCharacters() {
       this.characters = await CharacterOP.getAllCharacter();
+      this.resortCharacters();
+      if (this.characters.length) {
+        this.selectedCharacter = this.characters[0];
+        ChatOP.loadChats(this.selectedCharacter.id);
+      }
     },
     resortCharacters() {
       this.characters = this.characters.sort((a, b) => {

@@ -1,20 +1,25 @@
 <template>
   <div id="dialogue-container" class="w-full h-full">
-    <template v-for="content in dialogue.contents" :key="content.id">
-      <div class="chat chat-start" v-if="content.type === SpeakingType.SYSTEM">
-        <div class="chat-header">
-          {{ selectedCharacter?.name }}
+    <template v-if="dialogue && dialogue.contents">
+      <template v-for="content in dialogue.contents" :key="content.id">
+        <div
+          class="chat chat-start"
+          v-if="content.type === SpeakingType.SYSTEM"
+        >
+          <div class="chat-header">
+            {{ selectedCharacter?.name }}
+          </div>
+          <div class="chat-bubble bg-slate-500 text-xl">
+            {{ content.content }}
+          </div>
         </div>
-        <div class="chat-bubble bg-slate-500 text-xl">
-          {{ content.content }}
+        <div class="chat chat-end" v-else>
+          <div class="chat-header">Me</div>
+          <div class="chat-bubble bg-slate-700 text-xl">
+            {{ content.content }}
+          </div>
         </div>
-      </div>
-      <div class="chat chat-end" v-else>
-        <div class="chat-header">Me</div>
-        <div class="chat-bubble bg-slate-700 text-xl">
-          {{ content.content }}
-        </div>
-      </div>
+      </template>
     </template>
   </div>
 </template>

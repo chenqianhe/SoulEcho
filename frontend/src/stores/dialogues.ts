@@ -1,10 +1,14 @@
 import { defineStore } from "pinia";
-import { mockDialogues } from "@/types/dialogue";
+import type { Dialogue } from "@/types/dialogue";
 
 export const useDialoguesStore = defineStore("dialogues", {
   state: () => ({
-    dialogue: mockDialogues,
+    dialogue: null as unknown as Dialogue,
   }),
   getters: {},
-  actions: {},
+  actions: {
+    setDialogue(dialogue: Dialogue) {
+      this.dialogue = dialogue;
+    },
+  },
 });

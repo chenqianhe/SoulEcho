@@ -1,7 +1,8 @@
 import { characterDB } from "@/db/character";
-import { genId } from "@/apis/utils/genId";
+import { genId } from "@/utils/genId";
 import type { Character } from "@/types/character";
 import { useCharacterStore } from "@/stores/characters";
+import { ChatOP } from "@/apis/chat";
 
 export namespace CharacterOP {
   export const getAllCharacter = async () => {
@@ -43,6 +44,7 @@ export namespace CharacterOP {
       characterDB.setItem(id, newCharacter).then(() => {
         useCharacterStore().addCharacter(newCharacter);
       });
+      ChatOP.initChatRecord(id);
     }
   };
 

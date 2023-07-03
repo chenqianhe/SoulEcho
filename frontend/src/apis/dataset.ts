@@ -1,5 +1,5 @@
 import { datasetDB } from "@/db/dataset";
-import { genId } from "@/apis/utils/genId";
+import { genId } from "@/utils/genId";
 import type { Dataset } from "@/types/dataset";
 
 export namespace DatasetOP {

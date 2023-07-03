@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-import { type Chat, type ChatInfo, mockChats } from "@/types/chat";
+import type { Chat, ChatInfo } from "@/types/chat";
 
 export const useChatStore = defineStore("chat", {
   state: () => ({
-    chats: mockChats as Chat,
+    chats: null as unknown as Chat,
     selectedChat: null as unknown as ChatInfo,
   }),
   getters: {
@@ -19,6 +19,12 @@ export const useChatStore = defineStore("chat", {
       if (this.chats.historyChats.includes(chatData)) {
         this.selectedChat = chatData;
       }
+    },
+    setChats(chats: Chat) {
+      this.chats = chats;
+    },
+    addChat(chatData: ChatInfo) {
+      this.chats.historyChats.push(chatData);
     },
   },
 });
