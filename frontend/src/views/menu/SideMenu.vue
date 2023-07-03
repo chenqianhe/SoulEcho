@@ -32,15 +32,94 @@
       id="setting"
       class="w-full flex-none h-18 bg-gradient-to-b from-slate-200 to-slate-300"
     >
-      <div id="setting-btn" class="w-12 h-12 py-2 mx-auto rounded-lg">
+      <div
+        id="setting-btn"
+        class="w-12 h-12 py-2 mx-auto rounded-lg"
+        onclick="my_modal_1.showModal()"
+      >
         <div id="setting-btn-img" class="w-12 h-12 se-div-bg-img-format"></div>
       </div>
     </div>
+    <dialog id="my_modal_1" class="modal modal-bottom sm:modal-middle">
+      <form method="dialog" class="modal-box">
+        <h1 class="font-bold text-2xl">Upload Dataset</h1>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          ✕
+        </button>
+        <h2 class="text-xl mt-4">Dataset Content</h2>
+        <textarea
+          class="textarea h-40 w-full resize-none mr-2 bg-slate-100 text-xl border-2 border-solid border-slate-300 focus:outline-0"
+          placeholder=""
+          v-model="inputContent"
+        ></textarea>
+        <h2 class="text-xl mt-4">Dataset Nickname</h2>
+        <input
+          type="text"
+          v-model="inputNickname"
+          placeholder=""
+          class="input w-full mb-4 bg-slate-100 text-xl border-2 border-solid border-slate-300 focus:outline-0"
+        />
+        <button class="btn mt-2 float-right" @click="uploadDataSet">
+          Upload
+        </button>
+      </form>
+    </dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import Character from "@/views/menu/components/CharacterIcon.vue";
+import { ref } from "vue";
+import { DatasetDB } from "@/apis/Dataset";
+import { CharacterDB } from "@/apis/character";
+
+const inputContent = ref("");
+const inputNickname = ref("");
+
+const uploadDataSet = async () => {
+  const rawNames: string[] = [];
+  console.log(inputContent.value);
+  // check input
+  if (inputContent.value == "" || inputNickname.value == "") {
+    return;
+  }
+  // check valid content
+  {
+    let invalid = false;
+    const splitItems = inputContent.value
+      .split("\n\n")
+      .filter((item) => item != "");
+    for (const splitItem of splitItems) {
+      // userinfo content(contains \n)
+      if (splitItem.split("\n").length < 1) {
+        invalid = true;
+        break;
+      }
+      const userInfo = splitItem.split("\n")[0];
+      // name date time
+      if (userInfo.split(" ").length != 3) {
+        invalid = true;
+        break;
+      }
+      const name = userInfo.split(" ")[0];
+      if (!rawNames.includes(name)) {
+        rawNames.push(name);
+      }
+    }
+    if (invalid) {
+      return;
+    }
+  }
+  const id = await DatasetDB.uploadDataset(
+    inputContent.value,
+    inputNickname.value
+  );
+  if (id !== "") {
+    rawNames.forEach((name) => {
+      CharacterDB.addCharacter(name, id);
+    });
+  }
+};
 </script>
 
 <style scoped>
