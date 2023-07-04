@@ -1,8 +1,11 @@
 <template>
   <div id="menu" class="w-20 h-full flex flex-col bg-slate-300">
     <div id="logo" class="w-full flex-none h-16">
-      <img src="../../assets/persona.png" alt="PersonaSim" />
-      <img src="../../assets/sim.png" class="w-12 mx-auto" alt="PersonaSim" />
+      <img
+        src="../../assets/icon.png"
+        alt="SoulEcho"
+        class="h-12 w-14 mx-auto mt-2"
+      />
     </div>
     <div id="user" class="w-full flex-none h-18">
       <div id="user-icon" class="w-16 h-16 mx-auto se-div-bg-img-format"></div>
