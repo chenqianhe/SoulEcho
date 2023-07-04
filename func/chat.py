@@ -38,7 +38,7 @@ def chat_with_history(user_input, dataset, history, sys_name):
     input_data = input_data[:-1]
     system_prompt = {
         "role": "system",
-        "content": SYS_PROMPT_REAL["content"].replace("{OBJECT}", sys_name)
+        "content": SYS_PROMPT_REAL2["content"].replace("{OBJECT}", sys_name)
         + "xxxxxxxxxxxxxxx \n'sample_chat':\n{\n"
         + input_data
         + "\n } \n xxxxxxxxxxxxxxxx",
