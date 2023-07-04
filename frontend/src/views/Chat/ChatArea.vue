@@ -21,6 +21,7 @@
       <div
         id="chat_input_upload-btn"
         class="h-8 w-8 flex-none se-div-bg-img-format"
+        @click="chat"
       ></div>
     </div>
   </div>
@@ -32,20 +33,37 @@ import { ref, watch } from "vue";
 import { useChatStore } from "@/stores/chats";
 import { storeToRefs } from "pinia";
 import { DialogueOP } from "@/apis/dialogue";
+import { useDialoguesStore } from "@/stores/dialogues";
 
 const input = ref("");
 const chatStore = useChatStore();
 const { selectedChat } = storeToRefs(chatStore);
+
+const dialogueStore = useDialoguesStore();
+const { sendEnabled } = storeToRefs(dialogueStore);
 
 watch(
   selectedChat,
   (newVal) => {
     if (newVal) {
       DialogueOP.loadDialogue(newVal.dialogueId);
+      input.value = "";
     }
   },
   { immediate: true }
 );
+
+const chat = () => {
+  if (input.value && sendEnabled.value) {
+    DialogueOP.sendContent(
+      selectedChat.value.dialogueId,
+      selectedChat.value.datasetId,
+      input.value
+    );
+    input.value = "";
+    dialogueStore.stopSend();
+  }
+};
 </script>
 
 <style scoped>

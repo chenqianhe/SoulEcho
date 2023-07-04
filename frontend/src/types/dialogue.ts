@@ -7,6 +7,7 @@ export interface DialogueContent {
   id: string;
   type: SpeakingType;
   content: string;
+  date: string;
 }
 
 export enum SpeakingType {

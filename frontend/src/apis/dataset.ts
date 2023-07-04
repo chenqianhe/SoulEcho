@@ -1,6 +1,7 @@
 import { datasetDB } from "@/db/dataset";
 import { genId } from "@/utils/genId";
 import type { Dataset } from "@/types/dataset";
+import { sendDataset } from "@/apis/request";
 
 export namespace DatasetOP {
   export const uploadDataset = async (
@@ -8,13 +9,15 @@ export namespace DatasetOP {
     nickName: string = ""
   ) => {
     let id = genId();
+    const dataset = {
+      id,
+      content,
+      nickName,
+      date: `${new Date().getTime()}`,
+    };
+    sendDataset(dataset);
     await datasetDB
-      .setItem(id, {
-        id,
-        content,
-        nickName,
-        date: `${new Date().getTime()}`,
-      })
+      .setItem(id, dataset)
       .then(() => {
         console.log("upload success");
       })
