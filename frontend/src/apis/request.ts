@@ -2,7 +2,8 @@ import axios from "axios";
 import type { Dataset } from "@/types/dataset";
 import type { DialogueContent } from "@/types/dialogue";
 
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL =
+  "https://chenqianhe-supreme-telegram-55pjxx7x453vv7q-8000.preview.app.github.dev";
 
 export const sendDataset = (data: Dataset) => {
   const config = {
