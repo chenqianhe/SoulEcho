@@ -26,7 +26,7 @@ export namespace ChatOP {
         const chat = value as Chat;
         chat.historyChats.push({
           dialogueId: id,
-          title: "hello",
+          title: "New Chat",
           date: `${new Date().getTime()}`,
           type: "dataset",
           datasetId: datasetId,
