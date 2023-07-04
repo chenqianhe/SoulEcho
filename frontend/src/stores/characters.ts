@@ -2,11 +2,13 @@ import { defineStore } from "pinia";
 import type { Character } from "@/types/character";
 import { CharacterOP } from "@/apis/character";
 import { ChatOP } from "@/apis/chat";
+import type { Dataset } from "@/types/dataset";
 
 export const useCharacterStore = defineStore("counter", {
   state: () => ({
     characters: [] as Character[],
     selectedCharacter: null as unknown as Character,
+    selectedCharacterDatasets: [] as Dataset[],
   }),
   getters: {
     getCharacters(): Character[] {
@@ -65,6 +67,12 @@ export const useCharacterStore = defineStore("counter", {
         character.name = name;
         this.resortCharacters();
       }
+    },
+    setDataset(datasets: Dataset[]) {
+      this.selectedCharacterDatasets = datasets;
+    },
+    addDataset(dataset: Dataset) {
+      this.selectedCharacterDatasets.push(dataset);
     },
   },
 });

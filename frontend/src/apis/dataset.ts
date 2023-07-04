@@ -2,6 +2,7 @@ import { datasetDB } from "@/db/dataset";
 import { genId } from "@/utils/genId";
 import type { Dataset } from "@/types/dataset";
 import { sendDataset } from "@/apis/request";
+import { useCharacterStore } from "@/stores/characters";
 
 export namespace DatasetOP {
   export const uploadDataset = async (
@@ -19,6 +20,7 @@ export namespace DatasetOP {
     await datasetDB
       .setItem(id, dataset)
       .then(() => {
+        useCharacterStore().addDataset(dataset);
         console.log("upload success");
       })
       .catch((err) => {

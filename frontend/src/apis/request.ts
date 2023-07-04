@@ -26,6 +26,7 @@ export const chat = (
   dialogueId: string,
   datasetID: string,
   contentId: string,
+  sys_name: string,
   content: string,
   date: string,
   history: DialogueContent[]
@@ -40,6 +41,7 @@ export const chat = (
       dialogue_id: dialogueId,
       dataset_id: datasetID,
       content_id: contentId,
+      sys_name,
       content,
       date,
       history,

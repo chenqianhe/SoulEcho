@@ -40,7 +40,10 @@
           class="select w-full bg-slate-100 text-xl"
           v-model="selectedDatasetId"
         >
-          <option v-for="dataset in datasets" :key="dataset.id">
+          <option
+            v-for="dataset in selectedCharacterDatasets"
+            :key="dataset.id"
+          >
             {{ `${dataset.nickName}(${dataset.id})` }}
           </option>
         </select>
@@ -54,7 +57,7 @@
 
 <script setup lang="ts">
 import ChatList from "@/views/ChatSlection/components/ChatList.vue";
-import { type Ref, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useCharacterStore } from "@/stores/characters";
 import { storeToRefs } from "pinia";
 import type { Dataset } from "@/types/dataset";
@@ -62,23 +65,24 @@ import { DatasetOP } from "@/apis/dataset";
 import { ChatOP } from "@/apis/chat";
 
 const characterStore = useCharacterStore();
-const { selectedCharacter } = storeToRefs(characterStore);
-
-const datasets: Ref<Dataset[]> = ref([]);
+const { selectedCharacter, selectedCharacterDatasets } =
+  storeToRefs(characterStore);
 
 watch(
   selectedCharacter,
   async (newVal) => {
-    const datasetsId = newVal.sourceDatasetId;
-    const newDatasets: Dataset[] = [];
-    await DatasetOP.getAllDataset().then((res) => {
-      res.forEach((data) => {
-        if (datasetsId.includes(data.id)) {
-          newDatasets.push(data);
-        }
+    if (newVal) {
+      const datasetsId = newVal.sourceDatasetId;
+      const newDatasets: Dataset[] = [];
+      await DatasetOP.getAllDataset().then((res) => {
+        res.forEach((data) => {
+          if (datasetsId.includes(data.id)) {
+            newDatasets.push(data);
+          }
+        });
+        characterStore.setDataset(newDatasets);
       });
-      datasets.value = newDatasets;
-    });
+    }
   },
   { immediate: true }
 );

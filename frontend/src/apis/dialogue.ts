@@ -4,6 +4,7 @@ import type { Dialogue, DialogueContent } from "@/types/dialogue";
 import { SpeakingType } from "@/types/dialogue";
 import { genId } from "@/utils/genId";
 import { chat } from "@/apis/request";
+import { useCharacterStore } from "@/stores/characters";
 
 export namespace DialogueOP {
   export const loadDialogue = (id: string) => {
@@ -42,6 +43,7 @@ export namespace DialogueOP {
       dialogueId,
       datasetId,
       id1,
+      useCharacterStore().getSelectedCharacter.rawName,
       content,
       d1,
       useDialoguesStore().getHistory
