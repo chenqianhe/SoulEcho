@@ -37,7 +37,7 @@ export namespace ChatOP {
             await DialogueOP.addNewDialogue(id).then(() => {
               useChatStore().addChat({
                 dialogueId: id,
-                title: "hello",
+                title: "New Chat",
                 date: `${new Date().getTime()}`,
                 type: "dataset",
                 datasetId: datasetId,
