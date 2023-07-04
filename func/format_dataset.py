@@ -18,7 +18,7 @@ def format_dataset(raw_dataset: RAW_DATASET) -> FORMAT_DATASET:
             user = info.split(" ")[0]
             date = info.split(" ")[1]
             time = info.split(" ")[2]
-            content = data.replace(info, "")
+            content = data.replace(info, "")[1:]
             res["content"].append(
                 {"name": user, "date": date, "time": time, "content": content}
             )

@@ -23,6 +23,7 @@ CHAT_DATA = TypedDict(
         "dialogue_id": str,
         "dataset_id": str,
         "content_id": str,
+        "sys_name": str,
         "history": List[CHAT_CONTENT],
         "content": str,
         "date": str,
