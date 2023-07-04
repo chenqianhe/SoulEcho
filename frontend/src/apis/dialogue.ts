@@ -5,8 +5,7 @@ import { SpeakingType } from "@/types/dialogue";
 import { genId } from "@/utils/genId";
 import { chat } from "@/apis/request";
 import { useCharacterStore } from "@/stores/characters";
-// @ts-ignore
-import * as deppClone from "lodash.clonedeep";
+import cloneDeep from "lodash.clonedeep";
 
 export namespace DialogueOP {
   export const loadDialogue = (id: string) => {
@@ -39,7 +38,7 @@ export namespace DialogueOP {
       content,
       date: d1,
     };
-    const history = deppClone(useDialoguesStore().getHistory);
+    const history = cloneDeep(useDialoguesStore().getHistory);
     useDialoguesStore().addContent(user_content);
     addContentById(dialogueId, user_content);
     chat(
