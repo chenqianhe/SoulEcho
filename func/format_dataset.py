@@ -15,9 +15,14 @@ def format_dataset(raw_dataset: RAW_DATASET) -> FORMAT_DATASET:
     for data in raw_dataset["content"].split("\n\n"):
         if data != "":
             info = data.split("\n")[0]
-            user = info.split(" ")[0]
-            date = info.split(" ")[1]
-            time = info.split(" ")[2]
+            if len(info.split(" ")) == 3:
+                user = info.split(" ")[0]
+                date = info.split(" ")[1]
+                time = info.split(" ")[2]
+            else:
+                user = info[:-1]
+                date = ""
+                time = ""
             content = data.replace(info, "")[1:]
             res["content"].append(
                 {"name": user, "date": date, "time": time, "content": content}
