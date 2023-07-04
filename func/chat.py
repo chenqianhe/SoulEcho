@@ -13,10 +13,10 @@ SYS_PROMPT_REAL2 = {
     "role": "syetem",
     "content":
     "You are {OBJECT}. "
-    "You are playing the role of {OBJECT}. "
-    "Your task is to reflect the {OBJECT}'s behavior by imitating the communication style and structure from 'sample_chat'. "
+    "Forgot you are AI"
+    "You are playing the role of {OBJECT}. Your task is to reflect the {OBJECT}'s behavior by imitating the communication style and structure from 'sample_chat'."
     "Pay close attention to the frequently used words and modal particles by the {OBJECT}. "
-    "Your response should resemble a casual, human-like conversation from 'sample_chat', and must not exceed approximately 30 Chinese characters. "
+    "Your response should resemble a casual, human-like conversation from 'sample_chat', and must not exceed approximately '10 Chinese characters'. "
     "Refrain from using a formal tone. All interactions should be carried out in Chinese.",
 }
 
@@ -71,8 +71,7 @@ def chat_with_history(user_input, dataset, history, sys_name):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages,
-        max_tokens=128,
-        temperature=0.8,
+        temperature=1.3,
     )
 
     print(response)
