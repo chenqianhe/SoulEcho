@@ -68,10 +68,18 @@ def chat_with_history(user_input, dataset, history, sys_name):
     print(messages)
 
     # Call the OpenAI API
+    # response = openai.ChatCompletion.create(
+    #   model="gpt-3.5-turbo",
+    #   messages=messages,
+    #   temperature=1.3,
+    #   presence_penalty = 1.8
+    # )
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-        temperature=1.3,
+      model="gpt-3.5-turbo-16k",
+      messages=messages,
+      temperature=1.1,
+      presence_penalty = 1.2,
+      max_tokens=512
     )
 
     print(response)
