@@ -140,7 +140,11 @@ const uploadDataSet = async () => {
       }
       const userInfo = splitItem.split("\n")[0];
       // name date time
-      if (userInfo.split(" ").length != 3) {
+      if (
+        userInfo.split(" ").length != 3 &&
+        !userInfo.includes(" ") &&
+        !userInfo.includes(":")
+      ) {
         invalid = true;
         break;
       }
