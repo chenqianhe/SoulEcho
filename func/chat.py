@@ -15,15 +15,18 @@ SYS_PROMPT = {
 
 
 def chat_with_history(user_input, dataset, history, sys_name):
-    print("here we are")
+    inputData = ""
+    for data in dataset:
+        inputData += data["name"] + ":\n" + data["content"] + "\n\n"
+    inputData = inputData[:-1]
+    print(inputData)
     system_prompt = {
         "role": "system",
         "content": SYS_PROMPT["content"].replace("{OBJECT}", sys_name)
         + "xxxxxxxxxxxxxxx \n"
-        + dataset
+        + inputData
         + "\n xxxxxxxxxxxxxxxx",
     }
-    print(system_prompt)
 
     # Get the last 20 messages from the history
     history = history[-20:]
@@ -31,13 +34,11 @@ def chat_with_history(user_input, dataset, history, sys_name):
     # Map history names to roles
     history_messages = [
         {
-            "role": "assistant" if item["name"] == sys_name else "user",
+            "role": "assistant" if item["type"] == "system" else "user",
             "content": item["content"],
         }
         for item in history
     ]
-
-    print(history_messages)
 
     # Create a new list of messages, starting with the system prompt
     messages = [system_prompt]
@@ -47,8 +48,6 @@ def chat_with_history(user_input, dataset, history, sys_name):
 
     # Add the new user input
     messages.append({"role": "user", "content": user_input})
-
-    print(messages)
 
     # Call the OpenAI API
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)

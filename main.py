@@ -45,25 +45,20 @@ async def create_dataset(dataset_id: str, dataset: RAW_DATASET = Body(...)):
 
 @app.post("/chat/{chat_id}")
 async def get_chat(chat_id: str, chat_data: CHAT_DATA = Body(...)):
-    print(chat_data)
-    print(datasets)
     try:
         if chat_data["dataset_id"] not in datasets.keys():
-            print(datasets.keys())
             return {
                 "data": {
                     "message": f"Dataset {chat_data['dataset_id']} not found",
                     "statue": -1,
                 }
             }
-        print(datasets[chat_data["dataset_id"]]["content"])
         res = chat_with_history(
             chat_data["content"],
             datasets[chat_data["dataset_id"]]["content"],
             chat_data["history"],
             chat_data["sys_name"],
         )
-        print("???")
         res_id = str(uuid.uuid4())
         return {
             "data": {
