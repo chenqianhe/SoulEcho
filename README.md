@@ -11,7 +11,7 @@ SoulEcho 是一个 AI 聊天软件，能够满足用户情感陪伴的需求并�
 
 [视频](./docs/intro.mp4) [概览介绍](./docs/soulecho-overview.pdf) [产品需求文档](./docs/产品需求文档-创意无限公司.pdf) [竞品分析](./docs/%E7%AB%9E%E5%93%81%E5%88%86%E6%9E%90-Replika-%E5%88%9B%E6%84%8F%E6%97%A0%E9%99%90%E5%85%AC%E5%8F%B8.pdf)
 
-## 界面展示
+## 界面展示（目前仅支持日间模式，夜间模式色彩尚未调整）
 
 ![界面](./pics/ui_intro.png)
 
