@@ -194,7 +194,9 @@ SoulEcho 是一个 AI 聊天软件，能够满足用户情感陪伴的需求并�
     ]
 }
 ```
-
+</div>
+</details>
+ 
 <details>
 <summary><b>示例一</b></summary><div>
  
